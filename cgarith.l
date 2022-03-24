@@ -1,7 +1,9 @@
 %%
-[0-9]* { yylval = atoi(yytext); return NUM; }
-[a-zA-Z]* { yylval = yytext[0] ; return NAME; }
-[ \t] { }
-\n return 0;
+[A-Za-z]+ {yylval=yytext[0];return ID;}
+[0-9]+ {yylval=atoi(yytext);return NUM;}
+[ \t\n] yyterminate();
 . return yytext[0];
 %%
+void yyerror(char *msg){
+puts(msg);
+}
