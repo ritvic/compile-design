@@ -1,7 +1,7 @@
 alpha [A-Za-z]
 digit [0-9]
 %%
-[\t \n]
+[\t \n] ;
 "for" return FOR;
 {digit}+ return NUM;
 {alpha}({alpha}|{digit})* return ID;

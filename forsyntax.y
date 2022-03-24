@@ -3,7 +3,7 @@
 #include <stdlib.h>
 %}
 %token ID NUM FOR LE GE EQ NE OR AND
-%right "="
+%right '='
 %left OR AND
 %left '>' '<' LE GE EQ NE
 %left '+' '-'
@@ -53,7 +53,7 @@ E2     : E'<'E
          ;
 %%
 #include "lex.yy.c"
-main() {
+int main() {
     printf("Enter the expression:\n");
     yyparse();
 }
