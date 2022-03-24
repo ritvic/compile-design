@@ -66,7 +66,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "codeopt.y"
+#line 1 "1.y"
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -1289,44 +1289,44 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 8 "codeopt.y"
+#line 8 "1.y"
          {printf("Answer:t%d\t",yyvsp[0]);printf("MOV(@%c,AX)\n",yyvsp[-2]);}
 #line 1295 "y.tab.c"
     break;
 
   case 3:
-#line 9 "codeopt.y"
+#line 9 "1.y"
          {yyval=t;printf("t%d=t%d+t%d\t",t,yyvsp[-2],yyvsp[0]);printf("ADD(AX,BX)\n");t++;}
 #line 1301 "y.tab.c"
     break;
 
   case 4:
-#line 10 "codeopt.y"
+#line 10 "1.y"
           {yyval=t;printf("t%d=t%d-t%d\t",t,yyvsp[-2],yyvsp[0]);printf("SUB(AX,BX)\n");t++;}
 #line 1307 "y.tab.c"
     break;
 
   case 5:
-#line 11 "codeopt.y"
+#line 11 "1.y"
           {yyval=t;printf("t%d=t%d*t%d\t",t,yyvsp[-2],yyvsp[0]);printf("MUL(AX,BX)\n");t++;}
 #line 1313 "y.tab.c"
     break;
 
   case 6:
-#line 12 "codeopt.y"
+#line 12 "1.y"
           {yyval=t;printf("t%d=t%d/t%d\t",t,yyvsp[-2],yyvsp[0]);printf("DIV(AX,BX)\n");t++;}
 #line 1319 "y.tab.c"
     break;
 
   case 7:
-#line 13 "codeopt.y"
+#line 13 "1.y"
        {yyval=t;printf("t%d=%c\t",t,yyvsp[0]);t++;if(vala==0){printf("MOV(AX,@%c)\n",yyvsp[0]);vala=1;} else {printf("MOV(BX,@%c)\n",yyvsp[0]);valb=1;}}
 #line 1325 "y.tab.c"
     break;
 
   case 8:
-#line 14 "codeopt.y"
-        {yyval=t;printf("t%d=%d\t",t,yyvsp[0]);t++;if(vala==0){printf("MOV(AX,#%d)\n",yyvsp[0]);vala=1;} else {printf("MOV(BX,#%d)\n",yyvsp[0]);valb=1;}}
+#line 14 "1.y"
+        {yyval=t;printf("t%d=%d\t",t,yyvsp[0]);t++;if(vala==0){printf("MOV(AX,#%c)\n",yyvsp[0]);vala=1;} else {printf("MOV(BX,#%d)\n",yyvsp[0]);valb=1;}}
 #line 1331 "y.tab.c"
     break;
 
@@ -1563,7 +1563,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 16 "codeopt.y"
+#line 16 "1.y"
 
 #include "lex.yy.c"
 int main(){
