@@ -371,7 +371,7 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    1,    1,    1,
         1,    1,    1,    1,    5,    5,    5,    5,    5,    5,
@@ -441,7 +441,7 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "1.l"
+#line 1 "codeopt.l"
 #line 446 "lex.yy.c"
 
 #define INITIAL 0
@@ -659,7 +659,7 @@ YY_DECL
 		}
 
 	{
-#line 3 "1.l"
+#line 1 "codeopt.l"
 
 #line 665 "lex.yy.c"
 
@@ -720,28 +720,28 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 4 "1.l"
-{return ID;}
+#line 2 "codeopt.l"
+{yylval=yytext[0];return ID;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 5 "1.l"
+#line 3 "codeopt.l"
 {yylval=atoi(yytext);return NUM;}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 6 "1.l"
+#line 4 "codeopt.l"
 yyterminate();
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 7 "1.l"
+#line 5 "codeopt.l"
 return yytext[0];
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 8 "1.l"
+#line 6 "codeopt.l"
 ECHO;
 	YY_BREAK
 #line 748 "lex.yy.c"
@@ -1749,9 +1749,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 8 "1.l"
+#line 6 "codeopt.l"
 
-void yyerror(char* msg)
-{
-    puts(msg);
+void yyerror(char *msg){
+puts(msg);
 }
