@@ -59,8 +59,8 @@ using namespace std;
 // template <class T> void _print(stack <T> v) {cerr << "[ "; for (;v.size()!=0;) {_print(v.top()); cerr << " ";v.pop();} cerr << "]";}
 
 
-unordered_map<char,int> vn;
-unordered_map<string,string> rl;
+unordered_map<char,int> variable_number;
+unordered_map<string,string> rhs_lhs;
 
 string numberRHS(string aux){
 
@@ -71,7 +71,7 @@ string numberRHS(string aux){
             rhs = rhs + aux[i];
         }
         else {
-            rhs = rhs + aux[i] + to_string(vn[aux[i]]);
+            rhs = rhs + aux[i] + to_string(variable_number[aux[i]]);
         }
     }
 
@@ -81,8 +81,8 @@ string numberRHS(string aux){
 string numberLHS(string aux){
 
     string lhs = "";
-    vn[aux[0]] = vn[aux[0]] + 1;
-    lhs = aux[0] + to_string(vn[aux[0]]);
+    variable_number[aux[0]] = variable_number[aux[0]] + 1;
+    lhs = aux[0] + to_string(variable_number[aux[0]]);
 
     return lhs;
 }
@@ -100,13 +100,13 @@ void solve(){
         string rhs = numberRHS(aux);
         string lhs = numberLHS(aux);
 
-        if(rl[rhs] == ""){
-            rl[rhs] = lhs;
+        if(rhs_lhs[rhs] == ""){
+            rhs_lhs[rhs] = lhs;
             cout<<aux<<"\n";
         }
         else{
-            rl[rl[rhs]] = lhs;
-            string localRHS = rl[rhs];
+            rhs_lhs[rhs_lhs[rhs]] = lhs;
+            string localRHS = rhs_lhs[rhs];
             string localLHS = lhs;
 
             cout<<localLHS[0]<<"="<<localRHS[0]<<"\n";
