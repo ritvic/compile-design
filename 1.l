@@ -1,12 +1,14 @@
-alpha [a-zA-Z]
-digit [0-9]
+%{
+    #include<stdio.h>
+    extern int yylval;
+%}
 %%
-{alpha}+ {return ID;}
-{digit}+ {yylval=atoi(yytext);return NUM;}
-[\n\t] yyterminate();
+[0-9]+  { yylval=atoi(yytext); return NUMBER; }
+[\t] ;
+[\n] return 0;
 . return yytext[0];
 %%
-void yyerror(char* msg)
+int yywrap()
 {
-    puts(msg);
+    return 1;
 }
