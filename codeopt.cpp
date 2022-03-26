@@ -1,7 +1,6 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
-
 
 // #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 // #define MOD 1000000007
@@ -30,7 +29,6 @@ using namespace std;
 // typedef vector<vi> vvi;
 // typedef vector<string> vs;
 
-
 // #ifndef ONLINE_JUDGE
 // #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
 // #else
@@ -58,19 +56,22 @@ using namespace std;
 // template <class T> void _print(vector<vector<T>> v){cerr<<"[ ";for(auto x:v){_print(x);cerr<<nline;}cerr<<" ]";}
 // template <class T> void _print(stack <T> v) {cerr << "[ "; for (;v.size()!=0;) {_print(v.top()); cerr << " ";v.pop();} cerr << "]";}
 
+unordered_map<char, int> variable_number;
+unordered_map<string, string> rhs_lhs;
 
-unordered_map<char,int> variable_number;
-unordered_map<string,string> rhs_lhs;
-
-string numberRHS(string aux){
+string numberRHS(string aux)
+{
 
     string rhs = "";
-    for(int i=2;i<aux.length();i++){
+    for (int i = 2; i < aux.length(); i++)
+    {
 
-        if(aux[i] == '+' ||aux[i] == '-' ||aux[i] == '*' ||aux[i] == '/'){
+        if (aux[i] == '+' || aux[i] == '-' || aux[i] == '*' || aux[i] == '/')
+        {
             rhs = rhs + aux[i];
         }
-        else {
+        else
+        {
             rhs = rhs + aux[i] + to_string(variable_number[aux[i]]);
         }
     }
@@ -78,7 +79,8 @@ string numberRHS(string aux){
     return rhs;
 }
 
-string numberLHS(string aux){
+string numberLHS(string aux)
+{
 
     string lhs = "";
     variable_number[aux[0]] = variable_number[aux[0]] + 1;
@@ -87,47 +89,47 @@ string numberLHS(string aux){
     return lhs;
 }
 
-void solve(){
+void solve()
+{
 
     int numberOfLines;
-    cin>>numberOfLines;
-    
-    
-    for(int i=0;i<numberOfLines;i++){
+    cin >> numberOfLines;
+    for (int i = 0; i < numberOfLines; i++)
+    {
         string aux;
-        cin>>aux;
-
+        cin >> aux;
         string rhs = numberRHS(aux);
         string lhs = numberLHS(aux);
 
-        if(rhs_lhs[rhs] == ""){
+        if (rhs_lhs[rhs] == "")
+        {
             rhs_lhs[rhs] = lhs;
-            cout<<aux<<"\n";
+            cout << aux << "\n";
         }
-        else{
+        else
+        {
             rhs_lhs[rhs_lhs[rhs]] = lhs;
             string localRHS = rhs_lhs[rhs];
             string localLHS = lhs;
 
-            cout<<localLHS[0]<<"="<<localRHS[0]<<"\n";
+            cout << localLHS[0] << "=" << localRHS[0] << "\n";
         }
     }
-
-    
 }
 
-int main() {
-    #ifndef ONLINE_JUDGE
-        freopen("Error.txt", "w", stderr);
-    #endif
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-    #endif // !ONLINE_JUDGE
-    
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("Error.txt", "w", stderr);
+#endif
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+#endif // !ONLINE_JUDGE
+
     // int T;
     // cin>>T;
-    
+
     // while(T--)
-        solve();
+    solve();
     return 0;
 }

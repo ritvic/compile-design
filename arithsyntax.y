@@ -8,6 +8,7 @@ int flag=0;
 %left '(' ')'
 %%
 ArithmeticExpression: E{
+	
 		printf("Result=%d\n", $$);
 		return 0;
 		};
