@@ -1,19 +1,10 @@
-alpha [A-Za-z]
-digit [0-9]
 %%
-[ ] ;
 for return FOR;
-{digit}+ return NUM;
-{alpha}({alpha}|{digit})* return ID;
+[A-Za-z]+ return ID;
+[0-9]+ return NUM;
 "<=" return LE;
 ">=" return GE;
-"==" return EQ;
-"!=" return NE;
-"||" return OR;
-"&&" return AND;
 . return yytext[0];
 %%
-int yyerror(char * mes)
-{
-        puts(mes);
-}
+void yyerror(char *msg){
+puts(msg);}

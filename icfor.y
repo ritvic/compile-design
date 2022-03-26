@@ -1,105 +1,66 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 %}
-%token ID NUM FOR LE GE EQ NE OR AND
-%right "="
-%left OR AND
-%left '>' '<' LE GE EQ NE
+%token FOR ID NUM LE GE
+%right '='
+%left LE GE '<' '>'
 %left '+' '-'
 %left '*' '/'
-%right UMINUS
-%left '!'
 %%
-S       : FOR '(' E ';'{lab1();} E {lab2();}';' E { lab3();}')' E ';'{lab4(); exit(0);}
-E       : V '=' {push();} E{codegen_assign();}
-         | V '<' {push();} E{codegen_cond();}
-         | E '+' {push();} E{codegen();}
-         | E '-' {push();} E{codegen();}
-         | E '*' {push();} E{codegen();}
-         | E '/' {push();} E{codegen();}
-         | '(' E ')'
-         | '-' {push();} E{codegen_umin();} %prec UMINUS
-         | V
-         | NUM{push();}
-         ;
-V       : ID {push();}
-         ;
+S:FOR'('E1';'{lab1();}E1';'{lab2();}E1{lab3();}')'E1';'{lab4();exit(0);};
+E1: E'='{push();}E{codegen_assign();}
+   |E'<'{push();}E;
+E : E'+'{push();}E{codegen();}
+   |E'-'{push();}E{codegen();}
+   |E'*'{push();}E{codegen();}
+   |E'/'{push();}E{codegen();}
+   |ID{push();}
+   |NUM{push();}
+   ;
 %%
 #include "lex.yy.c"
 #include<string.h>
-#include<ctype.h>
-char st[100][10];
-int label[20];
-int top=0;
-char i_[2]="0";
-char temp[2]="t";
-int lno=0,ltop=0;
-int start;
-int main()
-{
-    printf("Enter the expression:\n");
-    yyparse();
+char st[100][25];
+int top=0,tint=0,lno=0,i;
+int main(){
+printf("Enter expression:\n");
+yyparse();}
+
+void push(){
+strcpy(st[++top],yytext);
 }
-int push()
-{
-   strcpy(st[++top],yytext);
+void codegen(){
+char temp[2];
+temp[0]='t';
+printf("t%d = %s %s %s\n",tint,st[top-2],st[top-1],st[top]);
+top-=2;
+temp[1]=tint+'0';
+strcpy(st[top],temp);
+tint++;
 }
-int codegen()
-{
-    strcpy(temp,"t");
-    strcat(temp,i_);
-    printf("%s = %s %s %s\n",temp,st[top-2],st[top-1],st[top]);
-    top-=2;
-    strcpy(st[top],temp);
-    i_[0]++;
+void codegen_assign(){
+printf("%s = %s\n",st[top-2],st[top]);
+top-=2;}
+void lab1(){
+printf("L%d: \n",lno++);
 }
-int codegen_cond()
-{}
-int codegen_umin()
-{
-    strcpy(temp,"t");
-    strcat(temp,i_);
-    printf("%s = -%s\n",temp,st[top]);
-    top--;
-    strcpy(st[top],temp);
-    i_[0]++;
+void lab2(){
+printf("if not %s %s %s then goto L%d\n goto L%d\n L%d:",st[top-2],st[top-1],st[top],lno,lno+1,lno+2);
+lno+=2;
+top-=2;
+tint++;
 }
-int codegen_assign()
-{
-    printf("%s = %s\n",st[top-2],st[top]);
-    top-=2;
+void lab3(){
+printf("goto L0\n L%d:",lno-1);
 }
-int lab1()
-{
-    printf("L%d: \n",lno++);
+
+void lab4(){
+printf("goto L%d\n L%d:",lno,lno-2);
 }
-int lab2()
-{
-    printf("if not %s<%s goto L%d\n",st[top-2],st[top],lno);
- top=top-2;
-    i_[0]++;
-    label[++ltop]=lno;
-    lno++;
-    printf("goto L%d\n",lno);
-    label[++ltop]=lno;
-    printf("L%d: \n",++lno);
-}
-int lab3()
-{
-    int x;
-    x=label[ltop--];
-    printf("goto L%d \n",start);
-    printf("L%d: \n",x);
-}
-int lab4()
-{
-    int x;
-    x=label[ltop--];
-    printf("goto L%d \n",lno);
-    printf("L%d: \n",x);
-}
-int yywrap()
-{
-return 1;
-}
+
+
+
+
+
+
