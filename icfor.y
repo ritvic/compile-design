@@ -58,9 +58,3 @@ printf("goto L0\n L%d:",lno-1);
 void lab4(){
 printf("goto L%d\n L%d:",lno,lno-2);
 }
-
-
-
-
-
-
