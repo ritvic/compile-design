@@ -5,6 +5,7 @@ for return FOR;
 "<=" return LE;
 ">=" return GE;
 . return yytext[0];
+[\n \t] ;
 %%
 void yyerror(char *msg){
 puts(msg);}

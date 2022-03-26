@@ -22,7 +22,7 @@ E : E'+'{push();}E{codegen();}
 #include "lex.yy.c"
 #include<string.h>
 char st[100][25];
-int top=0,tint=0,lno=0,i;
+int top=0,tint=0,lno=0;
 int main(){
 printf("Enter expression:\n");
 yyparse();}
